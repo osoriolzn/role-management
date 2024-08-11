@@ -1,16 +1,23 @@
+import { useRoutes, Navigate, BrowserRouter } from 'react-router-dom'
 import Home from '../home'
 import Login from '../login'
 import NotFound from '../not-found'
 
-import Layout from "../../components/layout"
+const AppRoutes = () => {
+  let route = useRoutes([
+    { path: '/', element: <Navigate to='/acceso' replace /> },
+    { path: '/home', element: <Home /> },
+    { path: '/acceso', element: <Login /> },
+    { path: '/not-found', element: <NotFound /> },
+  ])
+  return route
+}
 
 function App() {
   return (
-    <Layout>
-      <Home />
-      <Login />
-      <NotFound />
-    </Layout>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
 
