@@ -1,0 +1,18 @@
+.fig-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 80px);
+}
+
+.image-wrapper {
+    position: absolute;
+    width: 500px;
+    height: auto;
+    bottom: 20px;
+    right: 20px;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+}
