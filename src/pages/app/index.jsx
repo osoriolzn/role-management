@@ -8,7 +8,7 @@ const AppRoutes = () => {
     { path: '/', element: <Navigate to='/acceso' replace /> },
     { path: '/home', element: <Home /> },
     { path: '/acceso', element: <Login /> },
-    { path: '/not-found', element: <NotFound /> },
+    { path: '/*', element: <NotFound /> },
   ])
   return route
 }
