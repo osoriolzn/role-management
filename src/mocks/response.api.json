@@ -1,0 +1,30 @@
+[
+  {
+    "id_usuario": "1",
+    "nombre1": "Fulano",
+    "nombre2": "José",
+    "apellido1": "Pérez",
+    "apellido2": "Rojas",
+    "correo": "fulano.perez@correo.com",
+    "id_cargo": "2",
+    "fecha_ingreso": "2024-01-07T17:18:40.000Z",
+    "fecha_retiro": "null",
+    "estado": "1",
+    "usuario": "fulanito",
+    "password": "test123*"
+  },
+  {
+    "id_usuario": "2",
+    "nombre1": "Mariana",
+    "nombre2": "María",
+    "apellido1": "Palomino",
+    "apellido2": "Mendez",
+    "correo": "marian.palomino@correo.com",
+    "id_cargo": "3",
+    "fecha_ingreso": "2024-01-07T17:18:40.000Z",
+    "fecha_retiro": "null",
+    "estado": "1",
+    "usuario": "marimar",
+    "password": "test456*"
+  }
+]
