@@ -4,10 +4,12 @@ import Login from '../login'
 import NotFound from '../not-found'
 
 const AppRoutes = () => {
+  const userIsLogin = JSON.parse(localStorage.getItem('login'))
+  
   let route = useRoutes([
-    { path: '/', element: <Navigate to='/acceso' replace /> },
-    { path: '/home', element: <Home /> },
-    { path: '/acceso', element: <Login /> },
+    { path: '/', element: userIsLogin ? <Navigate replace to={'/home'} /> : <Navigate replace to={'/acceso'} /> },
+    { path: '/home', element: userIsLogin ? <Home /> : <Navigate replace to={'/acceso'} /> },
+    { path: '/acceso', element: userIsLogin ? <Navigate replace to={'/home'} /> : <Login /> },
     { path: '/*', element: <NotFound /> },
   ])
   return route
