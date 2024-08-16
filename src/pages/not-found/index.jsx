@@ -1,11 +1,10 @@
+import './notfound.css'
 
 function NotFound() {
   return (
-    <>
-      <div>
-        <p>NotFound</p>
-      </div>
-    </>
+    <figure className='not-found'>
+      <img src='src/assets/img/page-not-found.svg' alt='Page no found' />
+    </figure>
   )
 }
 

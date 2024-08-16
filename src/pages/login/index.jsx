@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Navigate } from 'react-router-dom'
+import	{ Toaster, toast } from 'sonner'
 import responseMock from '../../mocks/response.api.json'
 import './login.css'
 
@@ -24,6 +25,15 @@ function Login() {
       userName: formOfData.get('username'),
       password: formOfData.get('userpass')
     }
+
+    if (data.userName.length < 1) {
+      toast.info('Debe ingresar un usuario')
+      return
+    } else if (data.password.length < 1) {
+      toast.info('Debe ingresar una contraseña')
+      return
+    }
+
     userIsValid(data)
   }
 
@@ -35,7 +45,8 @@ function Login() {
       localStorage.setItem('login', stringifiedLogin)
       setUserIsLogin(true)
     } else {
-      console.log('Usuario o contraseña no validos')
+      toast.error('Usuario o contraseña no validos')
+      return
     }
   }
 
@@ -45,6 +56,7 @@ function Login() {
 
   return (
     <>
+      <Toaster className='toast' position='top-right' expand={true} />
       <img className='background-image' src='src/assets/img/login.webp' alt='Imagen de fondo'/>
       <div className='container'>
         <form ref={form}>
