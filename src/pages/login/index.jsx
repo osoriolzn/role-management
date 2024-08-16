@@ -66,7 +66,10 @@ function Login() {
               type='password'
             />
           </div>
-          <button onClick={handleLogin}>
+          <button
+            className='access'
+            onClick={handleLogin}
+          >
             ACCEDER
           </button>
         </form>
