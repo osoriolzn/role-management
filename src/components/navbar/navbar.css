@@ -65,3 +65,12 @@
 .dropdown-item:hover {
   background-color: #c3def8;
 }
+
+.logout {
+  width: 0;
+  margin-right: 15px;
+  border: none;
+  background-color: #00abf9;
+  color: #fff;
+  cursor: pointer;
+}
