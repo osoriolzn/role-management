@@ -28,8 +28,18 @@ function Navbar() {
             Configuración
             <ul className='dropdown'>
               <li className='dropdown-item'>
-                <NavLink to='/roles'>
-                  -Roles
+                <NavLink to='/apps'>
+                  -Aplicaciones
+                </NavLink>
+              </li>
+              <li className='dropdown-item'>
+                <NavLink to='/cargos'>
+                  -Cargos
+                </NavLink>
+              </li>
+              <li className='dropdown-item'>
+                <NavLink to='/direcciones'>
+                  -Direcciones
                 </NavLink>
               </li>
               <li className='dropdown-item'>
@@ -38,22 +48,32 @@ function Navbar() {
                 </NavLink>
               </li>
               <li className='dropdown-item'>
-                <NavLink to='/apps'>
-                  -Aplicaciones
+                <NavLink to='/funciones-rol'>
+                  -Funciones por rol
                 </NavLink>
               </li>
               <li className='dropdown-item'>
-                <NavLink to='/gerencia'>
+                <NavLink to='/gerencias'>
                   -Gerencias
                 </NavLink>
               </li>
               <li className='dropdown-item'>
-                <NavLink to='/direccion'>
-                  -Direcciones
+                <NavLink to='/roles'>
+                  -Roles
                 </NavLink>
               </li>
               <li className='dropdown-item'>
-                <NavLink to='/usuario'>
+                <NavLink to='/roles-app'>
+                  -Roles por app
+                </NavLink>
+              </li>
+              <li className='dropdown-item'>
+                <NavLink to='/roles-cargo'>
+                  -Roles por cargo
+                </NavLink>
+              </li>
+              <li className='dropdown-item'>
+                <NavLink to='/usuarios'>
                   -Usuarios
                 </NavLink>
               </li>
@@ -63,7 +83,7 @@ function Navbar() {
             RRHH
             <ul className='dropdown'>
               <li className='dropdown-item'>
-                <NavLink to='/empleado'>
+                <NavLink to='/empleados'>
                   -Empleados
                 </NavLink>
               </li>
@@ -73,7 +93,7 @@ function Navbar() {
             Reportes
             <ul className='dropdown'>
               <li className='dropdown-item'>
-                <NavLink to='/reporte'>
+                <NavLink to='/reportes'>
                   -Generador de informes
                 </NavLink>
               </li>
