@@ -1,25 +1,26 @@
 import { useState, useEffect, useRef } from 'react'
 import { Navigate } from 'react-router-dom'
 import	{ Toaster, toast } from 'sonner'
-import responseMock from '../../mocks/response.api.json'
+// import responseMock from '../../mocks/response.api.json'
 import './login.css'
 
-// const URL = 'https//url-del-api.com/user'
+const URL = 'http://localhost:3000/api/v1/users'
 
 function Login() {
   const [users, setUsers] = useState({})
   const [userIsLogin, setUserIsLogin] = useState(false)
   const form = useRef(null)
-
+  
   useEffect(() => {
-    setUsers(responseMock)
-    // fetch(URL)
-    //   .then(response => response.json())
-    //   .then(data => setUsers(data))
+    // setUsers(responseMock)
+    fetch(URL)
+      .then(response => response.json())
+      .then(data => setUsers(data))
   }, [])
 
   const handleLogin = (event) => {
     event.preventDefault()
+    
     const formOfData = new FormData(form.current)
     const data = {
       userName: formOfData.get('username'),
@@ -38,7 +39,7 @@ function Login() {
   }
 
   const userIsValid = (loginData) => {
-    const user = users.find((u) => u.usuario === loginData.userName && u.password === loginData.password)
+    const user = users.find((u) => u.usuario === loginData.userName && u.contrasena === loginData.password)
 
     if (user) {
       const stringifiedLogin = JSON.stringify(true)
