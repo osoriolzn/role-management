@@ -21,7 +21,9 @@ function Navbar() {
   }
   return (
     <nav className='navbar'>
-      <div className='logo'>Soft-ID</div>
+      <NavLink className='logo' to='/home'>
+        Soft-ID
+      </NavLink>
       <div className='container-menu'>
         <ul className='menu'>
           <li className='menu-item'>
