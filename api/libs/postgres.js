@@ -1,15 +1,11 @@
 /* eslint-disable no-undef */
-const { Client } = require('pg')
+const { Pool } = require('pg')
+const { config } = require('../config/config')
 
-async function getConnection() {
-  const client = new Client({
-    host: 'localhost',
-    port: 5050,
-    password: 'Zareth2015',
-    database: 'role-management'
-  })
-  await client.connect()
-  return client
-}
+const USER = encodeURIComponent(config.dbUser)
+const PASSWORD = encodeURIComponent(config.dbPassword)
+const connString = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
 
-module.exports = getConnection
+const pool = new Pool({ connectionString: connString })
+
+module.exports = pool

@@ -1,44 +1,23 @@
 /* eslint-disable no-undef */
-const mockUsers = [
-    {
-      id: '1',
-      usuario: '159753',
-      contrasena: 'test',
-      estado: '1',
-      id_app_rol: 1,
-      id_empleado: 3
-    },
-    {
-      id: '2',
-      usuario: '456852',
-      contrasena: 'test',
-      estado: '1',
-      id_app_rol: 2,
-      id_empleado: 2
-    }
-  ]
-  
+const sequelize = require('../libs/sequelize')
+
   class UsersServices {
-    constructor() {
-      this.users = []
-      this.generate()
-    }
-  
-    generate() {
-      this.users = mockUsers
-    }
-  
+    constructor() {}
+    
     async create(data) {
       const newUser = {
         ...data
       }
-  
+      
       this.users.push(newUser)
       return newUser
     }
   
     async find() {
-      return this.users
+      const query = 'SELECT * FROM app_usuarios'
+      
+      const [data] = await sequelize.query(query)
+      return data
     }
   
     async findOne(id) {
