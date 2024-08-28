@@ -10,4 +10,10 @@ router.get('/', async (req, res) => {
   res.status(200).json(positions)
 })
 
+router.post('/', async (req, res) => {
+  const body = req.body
+  const positions = await service.create(body)
+  res.status(201).json(positions)
+})
+
 module.exports = router
