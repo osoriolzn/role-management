@@ -49,19 +49,19 @@ function Positions() {
               />
             </div>
             <div className='input-group'>
-              <label htmlFor='manager'>Gerencia</label>
+              <label htmlFor='manager-id'>Gerencia</label>
               <input
-                name='manager'
-                id='manager'
+                name='manager-id'
+                id='manager-id'
                 autoComplete='true'
                 type='text'
               />
             </div>
             <div className='input-group'>
-              <label htmlFor='department'>Dirección</label>
+              <label htmlFor='department-id'>Dirección</label>
               <input
-                name='department'
-                id='department'
+                name='department-id'
+                id='department-id'
                 autoComplete='true'
                 type='text'
               />
