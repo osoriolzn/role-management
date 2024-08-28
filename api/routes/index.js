@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 const { Router } = require('express')
 
+const rolesAppRouter = require('./roles.app.routes')
 const usersRouter = require('./users.routes')
 
 function routerApi(app) {
@@ -8,6 +9,7 @@ function routerApi(app) {
     
     app.use('/api/v1', router)
     
+    router.use('/roles-app', rolesAppRouter)
     router.use('/users', usersRouter)
 }
 
