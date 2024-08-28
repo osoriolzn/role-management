@@ -12,7 +12,6 @@ const sequelize = require('../libs/sequelize')
     }
     
     async create(data) {
-      console.log(data)
       const { nombre, estado } = data
       
       const queryRes = await sequelize.query(

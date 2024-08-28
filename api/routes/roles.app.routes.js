@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const body = req.body
   const newRolApp = await service.create(body)
-
   res.status(201).json(newRolApp)
 })
 
