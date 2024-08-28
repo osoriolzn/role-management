@@ -10,4 +10,11 @@ router.get('/', async (req, res) => {
   res.status(200).json(rolApps)
 })
 
+router.post('/', async (req, res) => {
+  const body = req.body
+  const newRolApp = await service.create(body)
+
+  res.status(201).json(newRolApp)
+})
+
 module.exports = router
