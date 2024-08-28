@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 const { Router } = require('express')
-const AppRolesServices = require('../services/roles.app.service')
+const RolesAppsServices = require('../services/roles.app.service')
 
 const router = Router()
-const service = new AppRolesServices()
+const service = new RolesAppsServices()
 
 router.get('/', async (req, res) => {
-  const users = await service.find()
-  res.status(200).json(users)
+  const rolApps = await service.find()
+  res.status(200).json(rolApps)
 })
 
 module.exports = router

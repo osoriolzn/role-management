@@ -6,8 +6,8 @@ const router = Router()
 const service = new PositionsServices()
 
 router.get('/', async (req, res) => {
-  const users = await service.find()
-  res.status(200).json(users)
+  const positions = await service.find()
+  res.status(200).json(positions)
 })
 
 module.exports = router
