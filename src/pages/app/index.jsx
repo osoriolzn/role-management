@@ -1,6 +1,7 @@
 import { useRoutes, Navigate, BrowserRouter } from 'react-router-dom'
 import Home from '../home'
 import Login from '../login'
+import RolesApp from '../roles-app'
 import Users from '../users'
 import NotFound from '../not-found'
 
@@ -11,6 +12,7 @@ const AppRoutes = () => {
     { path: '/', element: userIsLogin ? <Navigate replace to={'/home'} /> : <Navigate replace to={'/acceso'} /> },
     { path: '/home', element: userIsLogin ? <Home /> : <Navigate replace to={'/acceso'} /> },
     { path: '/acceso', element: userIsLogin ? <Navigate replace to={'/home'} /> : <Login /> },
+    { path: '/roles-app', element: userIsLogin ? <RolesApp /> : <Login /> },
     { path: '/usuarios', element: userIsLogin ? <Users /> : <Login /> },
     { path: '/*', element: <NotFound /> },
   ])
