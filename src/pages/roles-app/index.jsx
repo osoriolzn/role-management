@@ -5,17 +5,18 @@ import Layout from '../../components/layout'
 import EndpointsRolesApp from '../../services/roles.app.service'
 import './roles.app.css'
 
-const API_URL = 'http://localhost:3000/api/v1/roles-app'
 const service = new EndpointsRolesApp()
 
 function RolesApp() {
   const [rolesApp, setRolesApp] = useState([])
   
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => response.json())
-      .then(data => setRolesApp(data))
-  }, [])
+    const loadRolesApp = async () => {
+      const response = await service.getRolesApp()
+      setRolesApp(response.data)
+    }
+    loadRolesApp()
+  }, [rolesApp])
   
   return (
     <>
@@ -36,15 +37,16 @@ function RolesApp() {
               nombre: '',
               estado: ''
             }}
-            onSubmit={async (values) => {
+            onSubmit={async (values, actions) => {
               try {
                 await service.createRolApp(values)
+                actions.resetForm()
               } catch (error) {
                 console.log(error)
               }
             }}
           >
-          {({handleChange, handleSubmit}) => (
+          {({handleChange, handleSubmit, values, isSubmitting}) => (
             <Form onSubmit={handleSubmit}>
               <div className='input-group'>
                 <label htmlFor='nombre'>Roles por App</label>
@@ -53,6 +55,7 @@ function RolesApp() {
                   id='nombre'
                   autoComplete='true'
                   type="text"
+                  value={values.nombre}
                   onChange={handleChange}
                 />
               </div>
@@ -63,14 +66,16 @@ function RolesApp() {
                   id='estado'
                   autoComplete='true'
                   type='text'
+                  value={values.estado}
                   onChange={handleChange}
                 />
               </div>
               <button
                 className='access'
                 type='submit'
+                disabled={isSubmitting}
               >
-                GUARDAR
+                {isSubmitting ? 'Guardando...' : "GUARDAR"}
               </button>
             </Form>
           )}
