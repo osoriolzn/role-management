@@ -1,18 +1,21 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { Formik, Form } from 'formik'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
+import EndpointsPositions from '../../services/positions.service'
 import './positions.css'
 
-const API_URL = 'http://localhost:3000/api/v1/cargos'
+const service = new EndpointsPositions()
 
 function Positions() {
   const [positions, setPositions] = useState([])
-  const form = useRef(null)
   
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => response.json())
-      .then(data => setPositions(data))
+    const loadPositions = async () => {
+      const response = await service.getPositions()
+      setPositions(response.data)
+    }
+    loadPositions()
   }, [])
 
   return (
@@ -29,45 +32,78 @@ function Positions() {
           </figure>
         }
         form={
-          <form ref={form}>
-            <div className='input-group'>
-              <label htmlFor='cargo'>Nombre del Cargo</label>
-              <input
-                name='cargo'
-                id='cargo'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='status'>Estado</label>
-              <input
-                name='status'
-                id='status'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='manager-id'>Gerencia</label>
-              <input
-                name='manager-id'
-                id='manager-id'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='department-id'>Dirección</label>
-              <input
-                name='department-id'
-                id='department-id'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <button className='access'>GUARDAR</button>
-          </form>
+          <Formik
+            initialValues={{
+              nombre: '',
+              estado: '',
+              id_gerencia: '',
+              id_direccion: ''
+            }}
+            onSubmit={async (values, actions) => {
+              try {
+                await service.createPosition(values)
+                actions.resetForm()
+              } catch (error) {
+                console.log(error)
+              }
+            }}
+          >
+            {({handleChange, handleSubmit, values, isSubmitting}) => (
+              <Form onSubmit={handleSubmit}>
+                <div className='input-group'>
+                  <label htmlFor='nombre'>Nombre Cargo</label>
+                  <input
+                    name='nombre'
+                    id='nombre'
+                    autoComplete='true'
+                    type='text'
+                    value={values.nombre}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className='input-group'>
+                  <label htmlFor='estado'>Estado</label>
+                  <input
+                    name='estado'
+                    id='estado'
+                    autoComplete='true'
+                    type='text'
+                    value={values.estado}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className='input-group'>
+                  <label htmlFor='id_gerencia'>Gerencia</label>
+                  <input
+                    name='id_gerencia'
+                    id='id_gerencia'
+                    autoComplete='true'
+                    type='text'
+                    value={values.id_gerencia}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className='input-group'>
+                  <label htmlFor='id_direccion'>Dirección</label>
+                  <input
+                    name='id_direccion'
+                    id='id_direccion'
+                    autoComplete='true'
+                    type='text'
+                    value={values.id_direccion}
+                    onChange={handleChange}
+                  />
+                </div>
+                <button
+                  className='access'
+                  type='submit'
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Guardando...' : 'GUARDAR'}
+                </button>
+              </Form>
+            )}
+          </Formik>
         }
         data={
           <table>
