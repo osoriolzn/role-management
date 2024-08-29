@@ -16,7 +16,7 @@ function RolesApp() {
       setRolesApp(response.data)
     }
     loadRolesApp()
-  }, [rolesApp])
+  }, [])
   
   return (
     <>
@@ -75,7 +75,7 @@ function RolesApp() {
                 type='submit'
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Guardando...' : "GUARDAR"}
+                {isSubmitting ? 'Guardando...' : 'GUARDAR'}
               </button>
             </Form>
           )}
