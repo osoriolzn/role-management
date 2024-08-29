@@ -15,7 +15,7 @@ const sequelize = require('../libs/sequelize')
       const { nombre, estado } = data
       
       const queryRes = await sequelize.query(
-        'INSERT INTO app_roles(nombre, estado) VALUES(:nombre, :estado)',
+        'INSERT INTO app_roles (nombre, estado) VALUES(:nombre, :estado)',
         {
           replacements: { nombre, estado }
         }

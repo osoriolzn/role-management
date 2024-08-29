@@ -49,7 +49,7 @@ function RolesApp() {
           {({handleChange, handleSubmit, values, isSubmitting}) => (
             <Form onSubmit={handleSubmit}>
               <div className='input-group'>
-                <label htmlFor='nombre'>Roles por App</label>
+                <label htmlFor='nombre'>Roles App</label>
                 <input
                   name='nombre'
                   id='nombre'

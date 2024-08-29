@@ -1,23 +1,28 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { Formik, Form } from 'formik'
+import { Toaster, toast } from 'sonner'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
+import EndpointsManagers from '../../services/managers.service'
 import './managers.css'
 
-const API_URL = 'http://localhost:3000/api/v1/gerencias'
+const service = new EndpointsManagers()
 
 function Managers() {
   const [managers, setManagers] = useState([])
-  const form = useRef(null)
   
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => response.json())
-      .then(data => setManagers(data))
+    const loadManagers = async () => {
+      const response = await service.getManagers()
+      setManagers(response.data)
+    }
+    loadManagers()
   }, [])
 
   return (
     <>
       <Navbar />
+      <Toaster className='toast' position='top-right' expand={true} />
       <Layout
         image={
           <figure>
@@ -29,27 +34,54 @@ function Managers() {
           </figure>
         }
         form={
-          <form ref={form}>
-            <div className='input-group'>
-              <label htmlFor='managers'>Nombre Gerencia</label>
-              <input
-                name='managers'
-                id='managers'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='status'>Estado</label>
-              <input
-                name='status'
-                id='status'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <button className='access'>GUARDAR</button>
-          </form>
+          <Formik
+            initialValues={{
+              nombre: '',
+              estado: ''
+            }}
+            onSubmit={async (values, actions) => {
+              try {
+                await service.createManager(values)
+                actions.resetForm()
+              } catch (error) {
+                toast.error(error)
+              }
+            }}
+          >
+          {({handleChange, handleSubmit, values, isSubmitting}) => (
+            <Form onSubmit={handleSubmit}>
+              <div className='input-group'>
+                <label htmlFor='nombre'>Nombre Gerencia</label>
+                <input
+                  name='nombre'
+                  id='nombre'
+                  autoComplete='true'
+                  type='text'
+                  value={values.nombre}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='estado'>Estado</label>
+                <input
+                  name='estado'
+                  id='estado'
+                  autoComplete='true'
+                  type='text'
+                  value={values.estado}
+                  onChange={handleChange}
+                />
+              </div>
+              <button
+                className='access'
+                type='submit'
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Guardando...' : 'GUARDAR'}
+              </button>
+            </Form>
+          )}
+          </Formik>
         }
         data={
           <table>
