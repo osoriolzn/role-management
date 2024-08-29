@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
-import { Toaster, toast } from 'sonner'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
 import EndpointsManagers from '../../services/managers.service'
@@ -22,7 +21,6 @@ function Managers() {
   return (
     <>
       <Navbar />
-      <Toaster className='toast' position='top-right' expand={true} />
       <Layout
         image={
           <figure>
@@ -44,7 +42,7 @@ function Managers() {
                 await service.createManager(values)
                 actions.resetForm()
               } catch (error) {
-                toast.error(error)
+                console.log(error)
               }
             }}
           >

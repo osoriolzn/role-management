@@ -10,6 +10,18 @@ const sequelize = require('../libs/sequelize')
       const [data] = await sequelize.query(query)
       return data
     }
+
+    async create(data) {
+      const { nombre, estado } = data
+      
+      const queryRes = await sequelize.query(
+        'INSERT INTO direcciones (nombre, estado) VALUES(:nombre, :estado)',
+        {
+          replacements: { nombre, estado }
+        }
+      )
+      return queryRes
+    }
   }
   
   module.exports = DepartmentsServices

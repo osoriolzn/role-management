@@ -1,18 +1,21 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { Formik, Form } from 'formik'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
+import EndpointsDepartments from '../../services/departments.service'
 import './departments.css'
 
-const API_URL = 'http://localhost:3000/api/v1/direcciones'
+const service = new EndpointsDepartments()
 
 function Departments() {
   const [departments, setDepartments] = useState([])
-  const form = useRef(null)
   
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => response.json())
-      .then(data => setDepartments(data))
+    const loadDepartments = async () => {
+      const response = await service.getDepartments()
+      setDepartments(response.data)
+    }
+    loadDepartments()
   }, [])
 
   return (
@@ -29,27 +32,54 @@ function Departments() {
           </figure>
         }
         form={
-          <form ref={form}>
-            <div className='input-group'>
-              <label htmlFor='departments'>Nombre Dirección</label>
-              <input
-                name='departments'
-                id='departments'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='status'>Estado</label>
-              <input
-                name='status'
-                id='status'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <button className='access'>GUARDAR</button>
-          </form>
+          <Formik
+            initialValues={{
+              nombre: '',
+              estado: ''
+            }}
+            onSubmit={async (values, actions) => {
+              try {
+                await service.createDepartment(values)
+                actions.resetForm()
+              } catch (error) {
+                console.log(error)
+              }
+            }}
+          >
+          {({handleChange, handleSubmit,values, isSubmitting}) => (
+            <Form onSubmit={handleSubmit}>
+              <div className='input-group'>
+                <label htmlFor='nombre'>Nombre Dirección</label>
+                <input
+                  name='nombre'
+                  id='nombre'
+                  autoComplete='true'
+                  type='text'
+                  value={values.nombre}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='estado'>Estado</label>
+                <input
+                  name='estado'
+                  id='estado'
+                  autoComplete='true'
+                  type='text'
+                  value={values.estado}
+                  onChange={handleChange}
+                />
+              </div>
+              <button
+                className='access'
+                type='submit'
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Guardando...' :'GUARDAR'}
+              </button>
+            </Form>
+          )}
+          </Formik>
         }
         data={
           <table>
@@ -62,8 +92,8 @@ function Departments() {
               </tr>
             </thead>
             <tbody>{departments.map(department => (
-              <tr key={department.id_department}>
-                <td>{department.id_department}</td>
+              <tr key={department.id_direccion}>
+                <td>{department.id_direccion}</td>
                 <td>{department.nombre}</td>
                 <td>{department.fecha_creacion}</td>
                 <td>{department.estado}</td>
