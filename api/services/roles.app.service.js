@@ -20,7 +20,6 @@ const sequelize = require('../libs/sequelize')
           replacements: { nombre, estado }
         }
       )
-
       return queryRes
     }
   }
