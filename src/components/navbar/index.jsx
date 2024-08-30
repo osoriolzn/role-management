@@ -65,18 +65,18 @@ function Navbar() {
                 </NavLink>
               </li>
               <li className='dropdown-item'>
-                <NavLink to='/roles-app'>
-                  -Roles por app
-                </NavLink>
-              </li>
-              <li className='dropdown-item'>
                 <NavLink to='/roles-cargo'>
                   -Roles por cargo
                 </NavLink>
               </li>
               <li className='dropdown-item'>
+                <NavLink to='/roles-app'>
+                  -Roles app Soft-ID
+                </NavLink>
+              </li>
+              <li className='dropdown-item'>
                 <NavLink to='/usuarios'>
-                  -Usuarios
+                  -Usuarios Soft-ID
                 </NavLink>
               </li>
             </ul>
