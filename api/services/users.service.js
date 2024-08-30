@@ -3,15 +3,6 @@ const sequelize = require('../libs/sequelize')
 
   class UsersServices {
     constructor() {}
-    
-    async create(data) {
-      const newUser = {
-        ...data
-      }
-      
-      this.users.push(newUser)
-      return newUser
-    }
   
     async find() {
       const query = 'SELECT * FROM app_usuarios'
@@ -22,6 +13,18 @@ const sequelize = require('../libs/sequelize')
   
     async findOne(id) {
       return this.users.find(item => item.id === id)
+    }
+
+    async create(data) {
+      const { usuario, contrasena, estado, id_app_rol, id_empleado } = data
+      
+      const queryRes = await sequelize.query(
+        'INSERT INTO app_usuarios (usuario, contrasena, estado, id_app_rol, id_empleado) VALUES(:usuario, :contrasena, :estado, :id_app_rol, :id_empleado)',
+        {
+          replacements: { usuario, contrasena, estado, id_app_rol, id_empleado }
+        }
+      )
+      return queryRes
     }
   
     async update(id, changes) {

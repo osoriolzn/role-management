@@ -1,18 +1,21 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { Formik, Form } from 'formik'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
+import EndpointsUsers from '../../services/users.service'
 import './user.css'
 
-const API_URL = 'http://localhost:3000/api/v1/users'
+const service = new EndpointsUsers()
 
 function Users() {
   const [users, setUsers] = useState([])
-  const form = useRef(null)
   
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => response.json())
-      .then(data => setUsers(data))
+    const loadUsers = async () => {
+      const response = await service.getUsers()
+      setUsers(response.data)
+    }
+    loadUsers()
   }, [])
 
   return (
@@ -29,54 +32,90 @@ function Users() {
           </figure>
         }
         form={
-          <form ref={form}>
-            <div className='input-group'>
-              <label htmlFor='username'>Usuario</label>
-              <input
-                name='username'
-                id='username'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='userpass'>Contraseña</label>
-              <input
-                name='userpass'
-                id='userpass'
-                autoComplete='true'
-                type='password'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='status'>Estado</label>
-              <input
-                name='status'
-                id='status'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='app-role'>App Rol Asociado</label>
-              <input
-                name='app-role'
-                id='app-role'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <div className='input-group'>
-              <label htmlFor='employee'>Empleado Asociado</label>
-              <input
-                name='employee'
-                id='employee'
-                autoComplete='true'
-                type='text'
-              />
-            </div>
-            <button className='access'>GUARDAR</button>
-          </form>
+          <Formik
+            initialValues={{
+              usuario: '',
+              contrasena: '',
+              estado: '',
+              id_app_rol: '',
+              id_empleado: ''
+            }}
+            onSubmit={async (values, actions) => {
+              try {
+                await service.createUser(values)
+                actions.resetForm()
+              } catch (error) {
+                console.log(error)
+              }
+            }}
+          >
+          {({handleChange, handleSubmit, values, isSubmitting}) => (
+            <Form onSubmit={handleSubmit}>
+              <div className='input-group'>
+                <label htmlFor='usuario'>Usuario</label>
+                <input
+                  name='usuario'
+                  id='usuario'
+                  autoComplete='true'
+                  type='text'
+                  value={values.usuario}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='contrasena'>Contraseña</label>
+                <input
+                  name='contrasena'
+                  id='contrasena'
+                  autoComplete='true'
+                  type='password'
+                  value={values.contrasena}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='estado'>Estado</label>
+                <input
+                  name='estado'
+                  id='estado'
+                  autoComplete='true'
+                  type='text'
+                  value={values.estado}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='id_app_rol'>App Rol Asociado</label>
+                <input
+                  name='id_app_rol'
+                  id='id_app_rol'
+                  autoComplete='true'
+                  type='text'
+                  value={values.id_app_rol}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='id_empleado'>Empleado Asociado</label>
+                <input
+                  name='id_empleado'
+                  id='id_empleado'
+                  autoComplete='true'
+                  type='text'
+                  value={values.id_empleado}
+                  onChange={handleChange}
+                />
+              </div>
+              <button
+                className='access'
+                type='submit'
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Guardando...' : 'GUARDAR'}
+              </button>
+            </Form>
+          )}
+          </Formik>
         }
         data={
           <table>
