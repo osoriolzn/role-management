@@ -1,6 +1,46 @@
-.layout {
+.layout-container {
     display: flex;
-    flex-direction: column;
+    /* justify-content: space-around; */
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    padding: 20px;
+}
+
+.layout-image {
+    display: flex;
+    flex: 1 1 0%;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+}
+
+.layout-form {
+    display: flex;
+    flex: 1 1 0%;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+
+    & form {
+        width: 100%;
+        max-width: 300px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.layout-data {
+    display: flex;
+    flex: 1 1 0%;
+    align-items: center;
+
+    & table {
+        border-collapse: collapse;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    & th, td {
+        border: 1px solid;
+    }
 }
