@@ -4,7 +4,7 @@ import	{ Toaster, toast } from 'sonner'
 // import responseMock from '../../mocks/response.api.json'
 import './login.css'
 
-const URL = 'http://localhost:3000/api/v1/users'
+const API_URL = 'http://localhost:3000/api/v1/users'
 
 function Login() {
   const [users, setUsers] = useState({})
@@ -13,7 +13,7 @@ function Login() {
   
   useEffect(() => {
     // setUsers(responseMock)
-    fetch(URL)
+    fetch(API_URL)
       .then(response => response.json())
       .then(data => setUsers(data))
   }, [])

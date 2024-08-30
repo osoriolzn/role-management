@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
 import './layout.css'
 
-function Layout({ children }) {
+const Layout = ({ image, form, data }) => {
   return (
-    <>
-      <div className='layout'>
-        {children}
+    <div className="layout-container">
+      <div className="layout-image">
+        {image}
       </div>
-    </>
-  );
+      <div className="layout-form">
+        {form}
+      </div>
+      <div className="layout-data">
+        {data}
+      </div>
+    </div>
+  )
 }
 
-export default Layout;
+export default Layout
