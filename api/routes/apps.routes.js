@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const body = req.body
-  const app = await service.create(body)
-  res.status(201).json(app)
+  const newApp = await service.create(body)
+  res.status(201).json(newApp)
 })
 
 module.exports = router
