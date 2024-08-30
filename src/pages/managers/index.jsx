@@ -26,7 +26,7 @@ function Managers() {
           <figure>
             <img
               className='managers-img'
-              src='src/assets/img/roles.webp'
+              src='src/assets/img/gerencia.webp'
               alt='logo de la página'
             />
           </figure>

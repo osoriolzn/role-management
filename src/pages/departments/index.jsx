@@ -26,7 +26,7 @@ function Departments() {
           <figure>
             <img
               className='departments-img'
-              src='src/assets/img/roles.webp'
+              src='src/assets/img/gerencia.webp'
               alt='logo de la página'
             />
           </figure>
