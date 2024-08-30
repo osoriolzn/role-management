@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 const { Router } = require('express')
 
+const AppsRouter = require('./apps.routes')
 const DepartmentsRouter = require('./departments.routes')
 const ManagersRouter = require('./managers.routes')
 const PositionsRouter = require('./positions.routes')
@@ -12,6 +13,7 @@ function routerApi(app) {
     
     app.use('/api/v1', router)
     
+    router.use('/apps', AppsRouter)
     router.use('/direcciones', DepartmentsRouter)
     router.use('/gerencias', ManagersRouter)
     router.use('/cargos', PositionsRouter)
