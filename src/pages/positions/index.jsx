@@ -35,7 +35,6 @@ function Positions() {
           <Formik
             initialValues={{
               nombre: '',
-              estado: '',
               id_gerencia: '',
               id_direccion: ''
             }}
@@ -58,17 +57,6 @@ function Positions() {
                     autoComplete='true'
                     type='text'
                     value={values.nombre}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='input-group'>
-                  <label htmlFor='estado'>Estado</label>
-                  <input
-                    name='estado'
-                    id='estado'
-                    autoComplete='true'
-                    type='text'
-                    value={values.estado}
                     onChange={handleChange}
                   />
                 </div>

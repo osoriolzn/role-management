@@ -36,7 +36,6 @@ function Users() {
             initialValues={{
               usuario: '',
               contrasena: '',
-              estado: '',
               id_app_rol: '',
               id_empleado: ''
             }}
@@ -70,17 +69,6 @@ function Users() {
                   autoComplete='true'
                   type='password'
                   value={values.contrasena}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className='input-group'>
-                <label htmlFor='estado'>Estado</label>
-                <input
-                  name='estado'
-                  id='estado'
-                  autoComplete='true'
-                  type='text'
-                  value={values.estado}
                   onChange={handleChange}
                 />
               </div>

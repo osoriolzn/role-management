@@ -34,8 +34,7 @@ function Managers() {
         form={
           <Formik
             initialValues={{
-              nombre: '',
-              estado: ''
+              nombre: ''
             }}
             onSubmit={async (values, actions) => {
               try {
@@ -56,17 +55,6 @@ function Managers() {
                   autoComplete='true'
                   type='text'
                   value={values.nombre}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className='input-group'>
-                <label htmlFor='estado'>Estado</label>
-                <input
-                  name='estado'
-                  id='estado'
-                  autoComplete='true'
-                  type='text'
-                  value={values.estado}
                   onChange={handleChange}
                 />
               </div>

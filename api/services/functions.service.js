@@ -19,7 +19,8 @@ const sequelize = require('../libs/sequelize')
     }
 
     async create(data) {
-      const { nombre, estado } = data
+      const { nombre } = data
+      const estado = '1'
       
       const queryRes = await sequelize.query(
         'INSERT INTO funciones (nombre, estado) VALUES(:nombre, :estado)',
