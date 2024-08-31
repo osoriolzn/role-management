@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   const { id } = req.params
-  const user = await service.findOne(id)
-  res.status(200).json(user)
+  const employee = await service.findOne(id)
+  res.status(200).json(employee)
 })
 
 router.post('/', async (req, res) => {

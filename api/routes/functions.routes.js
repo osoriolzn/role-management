@@ -10,11 +10,11 @@ router.get('/', async (req, res) => {
   res.status(200).json(functions)
 })
 
-// router.get('/:id', async (req, res) => {
-//   const { id } = req.params
-//   const func = await service.findOne(id)
-//   res.status(200).json(func)
-// })
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const func = await service.findOne(id)
+  res.status(200).json(func)
+})
 
 router.post('/', async (req, res) => {
   const body = req.body

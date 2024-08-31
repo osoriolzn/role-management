@@ -10,6 +10,12 @@ router.get('/', async (req, res) => {
   res.status(200).json(rolApps)
 })
 
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const rolApp = await service.findOne(id)
+  res.status(200).json(rolApp)
+})
+
 router.post('/', async (req, res) => {
   const body = req.body
   const newRolApp = await service.create(body)
