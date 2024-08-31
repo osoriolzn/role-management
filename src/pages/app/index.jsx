@@ -7,6 +7,7 @@ import Functions from '../functions'
 import Managers from '../managers'
 import Positions from '../positions'
 import RolesApp from '../roles-app'
+import Roles from '../roles'
 import Users from '../users'
 import NotFound from '../not-found'
 
@@ -23,6 +24,7 @@ const AppRoutes = () => {
     { path: '/gerencias', element: userIsLogin ? <Managers /> : <Login /> },
     { path: '/cargos', element: userIsLogin ? <Positions /> : <Login /> },
     { path: '/roles-app', element: userIsLogin ? <RolesApp /> : <Login /> },
+    { path: '/roles', element: userIsLogin ? <Roles /> : <Login /> },
     { path: '/usuarios', element: userIsLogin ? <Users /> : <Login /> },
     { path: '/*', element: <NotFound /> },
   ])
