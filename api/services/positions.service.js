@@ -12,8 +12,9 @@ const sequelize = require('../libs/sequelize')
     }
 
     async create(data) {
-      let { nombre, estado, id_gerencia, id_direccion } = data
-      
+      let { nombre, id_gerencia, id_direccion } = data
+      const estado = '1'
+
       if (id_direccion === '') {
         id_direccion = null
       }

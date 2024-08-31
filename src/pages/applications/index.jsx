@@ -2,22 +2,22 @@ import { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
-import EndpointsRolesApp from '../../services/roles.app.service'
-import './roles.app.css'
+import EndpointsApps from '../../services/apps.service'
+import './apps.css'
 
-const service = new EndpointsRolesApp()
+const service = new EndpointsApps()
 
-function RolesApp() {
-  const [rolesApp, setRolesApp] = useState([])
+function Apps() {
+  const [apps, setApps] = useState([])
   
   useEffect(() => {
-    const loadRolesApp = async () => {
-      const response = await service.getRolesApp()
-      setRolesApp(response.data)
+    const loadApps = async () => {
+      const response = await service.getApps()
+      setApps(response.data)
     }
-    loadRolesApp()
+    loadApps()
   }, [])
-  
+
   return (
     <>
       <Navbar />
@@ -25,8 +25,8 @@ function RolesApp() {
         image={
           <figure>
             <img
-              className='rolapp-img'
-              src='src/assets/img/users.webp'
+              className='applications-img'
+              src='src/assets/img/app.webp'
               alt='logo de la página'
             />
           </figure>
@@ -38,22 +38,22 @@ function RolesApp() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createRolApp(values)
+                await service.createApp(values)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)
               }
             }}
           >
-          {({handleChange, handleSubmit, values, isSubmitting}) => (
+          {({handleChange, handleSubmit,values, isSubmitting}) => (
             <Form onSubmit={handleSubmit}>
               <div className='input-group'>
-                <label htmlFor='nombre'>Roles App</label>
+                <label htmlFor='nombre'>Nombre App</label>
                 <input
                   name='nombre'
                   id='nombre'
                   autoComplete='true'
-                  type="text"
+                  type='text'
                   value={values.nombre}
                   onChange={handleChange}
                 />
@@ -63,7 +63,7 @@ function RolesApp() {
                 type='submit'
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Guardando...' : 'GUARDAR'}
+                {isSubmitting ? 'Guardando...' :'GUARDAR'}
               </button>
             </Form>
           )}
@@ -74,15 +74,15 @@ function RolesApp() {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Roles por App</th>
-                <th>Estado</th>
+                <th>Nombre App</th>
+                <th>F. Creación</th>
               </tr>
             </thead>
-            <tbody>{rolesApp.map(rol => (
-              <tr key={rol.id_app_rol}>
-                <td>{rol.id_app_rol}</td>
-                <td>{rol.nombre}</td>
-                <td>{rol.estado}</td>
+            <tbody>{apps.map(app => (
+              <tr key={app.id_aplicacion}>
+                <td>{app.id_aplicacion}</td>
+                <td>{app.nombre}</td>
+                <td>{app.fecha_creacion}</td>
               </tr>
             ))}</tbody>
           </table>
@@ -92,4 +92,4 @@ function RolesApp() {
   )
 }
 
-export default RolesApp
+export default Apps

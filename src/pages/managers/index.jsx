@@ -26,7 +26,7 @@ function Managers() {
           <figure>
             <img
               className='managers-img'
-              src='src/assets/img/roles.webp'
+              src='src/assets/img/gerencia.webp'
               alt='logo de la página'
             />
           </figure>
@@ -34,8 +34,7 @@ function Managers() {
         form={
           <Formik
             initialValues={{
-              nombre: '',
-              estado: ''
+              nombre: ''
             }}
             onSubmit={async (values, actions) => {
               try {
@@ -56,17 +55,6 @@ function Managers() {
                   autoComplete='true'
                   type='text'
                   value={values.nombre}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className='input-group'>
-                <label htmlFor='estado'>Estado</label>
-                <input
-                  name='estado'
-                  id='estado'
-                  autoComplete='true'
-                  type='text'
-                  value={values.estado}
                   onChange={handleChange}
                 />
               </div>
