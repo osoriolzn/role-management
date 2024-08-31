@@ -10,6 +10,11 @@ class EndpointsUsers {
     return response
   }
 
+  async getUserById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
+
   async createUser(user) {
     const response = await axios.post(API_URL, user)
     return response

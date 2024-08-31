@@ -18,6 +18,10 @@ function Functions() {
     loadFunctions()
   }, [])
 
+  const addFunctions = (newFunction) => {
+    setFunc([...funcs, newFunction[0]])
+  }
+
   return (
     <>
       <Navbar />
@@ -38,7 +42,9 @@ function Functions() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createFunction(values)
+                const response = await service.createFunction(values)
+                const newFunction = await service.getFunctionById(response.data[0])
+                addFunctions(newFunction.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)

@@ -19,7 +19,6 @@ function Employees() {
   }, [])
 
   const addEmployees = (newEmployee) => {
-    console.log(newEmployee)
     setEmployees([...employees, newEmployee[0]])
   }
 

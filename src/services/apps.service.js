@@ -10,6 +10,11 @@ class EndpointsApps {
     return response
   }
 
+  async getAppById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
+
   async createApp(app) {
     const response = await axios.post(API_URL, app)
     return response

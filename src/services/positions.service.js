@@ -10,6 +10,11 @@ class EndpointsPositions {
     return response
   }
 
+  async getPositionById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
+
   async createPosition(position) {
     const response = await axios.post(API_URL, position)
     return response

@@ -18,6 +18,10 @@ function Departments() {
     loadDepartments()
   }, [])
 
+  const addDepartments = (newDepartment) => {
+    setDepartments([...departments, newDepartment[0]])
+  }
+
   return (
     <>
       <Navbar />
@@ -38,7 +42,9 @@ function Departments() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createDepartment(values)
+                const response = await service.createDepartment(values)
+                const newDepartment = await service.getDepartmentById(response.data[0])
+                addDepartments(newDepartment.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)

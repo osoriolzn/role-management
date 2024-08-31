@@ -18,6 +18,10 @@ function Managers() {
     loadManagers()
   }, [])
 
+  const addManagers = (newManager) => {
+    setManagers([...managers, newManager[0]])
+  }
+
   return (
     <>
       <Navbar />
@@ -38,7 +42,9 @@ function Managers() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createManager(values)
+                const response = await service.createManager(values)
+                const newManager = await service.getManagerById(response.data[0])
+                addManagers(newManager.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)
