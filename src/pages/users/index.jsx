@@ -18,6 +18,10 @@ function Users() {
     loadUsers()
   }, [])
 
+  const addUsers = (newUser) => {
+    setUsers([...users, newUser[0]])
+  }
+
   return (
     <>
       <Navbar />
@@ -41,7 +45,9 @@ function Users() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createUser(values)
+                const response = await service.createUser(values)
+                const newUser = await service.getUserById(response.data[0])
+                addUsers(newUser.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)

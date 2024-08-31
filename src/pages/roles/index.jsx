@@ -17,6 +17,10 @@ function RolesApp() {
     }
     loadRoles()
   }, [])
+
+  const addRoles = (newRol) => {
+    setRoles([...roles, newRol[0]])
+  }
   
   return (
     <>
@@ -39,7 +43,9 @@ function RolesApp() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createRol(values)
+                const response = await service.createRol(values)
+                const newRol = await service.getRolById(response.data[0])
+                addRoles(newRol.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)

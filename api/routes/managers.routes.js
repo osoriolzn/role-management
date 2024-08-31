@@ -10,6 +10,12 @@ router.get('/', async (req, res) => {
   res.status(200).json(managers)
 })
 
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const manager = await service.findOne(id)
+  res.status(200).json(manager)
+})
+
 router.post('/', async (req, res) => {
   const body = req.body
   const newManager = await service.create(body)
