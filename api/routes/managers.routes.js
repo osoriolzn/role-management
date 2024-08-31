@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const body = req.body
-  const managers = await service.create(body)
-  res.status(201).json(managers)
+  const newManager = await service.create(body)
+  res.status(201).json(newManager)
 })
 
 module.exports = router

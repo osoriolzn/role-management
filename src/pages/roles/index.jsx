@@ -2,20 +2,20 @@ import { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 import Navbar from '../../components/navbar'
 import Layout from '../../components/layout'
-import EndpointsRolesApp from '../../services/roles.app.service'
-import './roles.app.css'
+import EndpointsRoles from '../../services/roles.service'
+import './roles.css'
 
-const service = new EndpointsRolesApp()
+const service = new EndpointsRoles()
 
 function RolesApp() {
-  const [rolesApp, setRolesApp] = useState([])
+  const [roles, setRoles] = useState([])
   
   useEffect(() => {
-    const loadRolesApp = async () => {
-      const response = await service.getRolesApp()
-      setRolesApp(response.data)
+    const loadRoles = async () => {
+      const response = await service.getRoles()
+      setRoles(response.data)
     }
-    loadRolesApp()
+    loadRoles()
   }, [])
   
   return (
@@ -25,7 +25,7 @@ function RolesApp() {
         image={
           <figure>
             <img
-              className='rolapp-img'
+              className='roles-img'
               src='src/assets/img/users.webp'
               alt='logo de la página'
             />
@@ -34,11 +34,12 @@ function RolesApp() {
         form={
           <Formik
             initialValues={{
-              nombre: ''
+              nombre: '',
+              id_aplicacion: ''
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createRolApp(values)
+                await service.createRol(values)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)
@@ -48,13 +49,24 @@ function RolesApp() {
           {({handleChange, handleSubmit, values, isSubmitting}) => (
             <Form onSubmit={handleSubmit}>
               <div className='input-group'>
-                <label htmlFor='nombre'>Roles App</label>
+                <label htmlFor='nombre'>Nombre Rol</label>
                 <input
                   name='nombre'
                   id='nombre'
                   autoComplete='true'
                   type="text"
                   value={values.nombre}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='input-group'>
+                <label htmlFor='id_aplicacion'>Id App</label>
+                <input
+                  name='id_aplicacion'
+                  id='id_aplicacion'
+                  autoComplete='true'
+                  type='text'
+                  value={values.id_aplicacion}
                   onChange={handleChange}
                 />
               </div>
@@ -74,15 +86,19 @@ function RolesApp() {
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Roles por App</th>
-                <th>Estado</th>
+                <th>Nombre Rol</th>
+                <th>estado</th>
+                <th>Id App</th>
+                <th>F. Creación</th>
               </tr>
             </thead>
-            <tbody>{rolesApp.map(rol => (
-              <tr key={rol.id_app_rol}>
-                <td>{rol.id_app_rol}</td>
+            <tbody>{roles.map(rol => (
+              <tr key={rol.id_rol}>
+                <td>{rol.id_rol}</td>
                 <td>{rol.nombre}</td>
                 <td>{rol.estado}</td>
+                <td>{rol.id_aplicacion}</td>
+                <td>{rol.fecha_creacion}</td>
               </tr>
             ))}</tbody>
           </table>

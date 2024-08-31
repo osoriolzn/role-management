@@ -16,7 +16,8 @@ const sequelize = require('../libs/sequelize')
     }
 
     async create(data) {
-      const { usuario, contrasena, estado, id_app_rol, id_empleado } = data
+      const { usuario, contrasena, id_app_rol, id_empleado } = data
+      const estado = '1'
       
       const queryRes = await sequelize.query(
         'INSERT INTO app_usuarios (usuario, contrasena, estado, id_app_rol, id_empleado) VALUES(:usuario, :contrasena, :estado, :id_app_rol, :id_empleado)',
