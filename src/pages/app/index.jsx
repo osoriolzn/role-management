@@ -3,6 +3,7 @@ import Home from '../home'
 import Login from '../login'
 import Applications from '../applications'
 import Departments from '../departments'
+import Employees from '../employees'
 import Functions from '../functions'
 import Managers from '../managers'
 import Positions from '../positions'
@@ -20,6 +21,7 @@ const AppRoutes = () => {
     { path: '/acceso', element: userIsLogin ? <Navigate replace to={'/home'} /> : <Login /> },
     { path: '/apps', element: userIsLogin ? <Applications /> : <Login /> },
     { path: '/direcciones', element: userIsLogin ? <Departments /> : <Login /> },
+    { path: '/empleados', element: userIsLogin ? <Employees /> : <Login /> },
     { path: '/funciones', element: userIsLogin ? <Functions /> : <Login /> },
     { path: '/gerencias', element: userIsLogin ? <Managers /> : <Login /> },
     { path: '/cargos', element: userIsLogin ? <Positions /> : <Login /> },

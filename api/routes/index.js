@@ -3,6 +3,7 @@ const { Router } = require('express')
 
 const AppsRouter = require('./apps.routes')
 const DepartmentsRouter = require('./departments.routes')
+const EmployeesServices = require('./employees.routes')
 const FunctionsRouter = require('./functions.routes')
 const ManagersRouter = require('./managers.routes')
 const PositionsRouter = require('./positions.routes')
@@ -17,6 +18,7 @@ function routerApi(app) {
     
     router.use('/apps', AppsRouter)
     router.use('/direcciones', DepartmentsRouter)
+    router.use('/empleados', EmployeesServices)
     router.use('/funciones', FunctionsRouter)
     router.use('/gerencias', ManagersRouter)
     router.use('/cargos', PositionsRouter)
