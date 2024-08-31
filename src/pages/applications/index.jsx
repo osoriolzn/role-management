@@ -18,6 +18,10 @@ function Apps() {
     loadApps()
   }, [])
 
+  const addApps = (newApp) => {
+    setApps([...apps, newApp[0]])
+  }
+
   return (
     <>
       <Navbar />
@@ -38,7 +42,9 @@ function Apps() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createApp(values)
+                const response = await service.createApp(values)
+                const newApp = await service.getAppById(response.data[0])
+                addApps(newApp.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)

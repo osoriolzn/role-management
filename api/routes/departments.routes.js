@@ -10,6 +10,12 @@ router.get('/', async (req, res) => {
   res.status(200).json(departments)
 })
 
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const department = await service.findOne(id)
+  res.status(200).json(department)
+})
+
 router.post('/', async (req, res) => {
   const body = req.body
   const newDepartment = await service.create(body)

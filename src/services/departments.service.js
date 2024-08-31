@@ -10,6 +10,11 @@ class EndpointsDepartments {
     return response
   }
 
+  async getDepartmentById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
+
   async createDepartment(department) {
     const response = await axios.post(API_URL, department)
     return response

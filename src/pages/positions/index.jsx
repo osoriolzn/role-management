@@ -18,6 +18,10 @@ function Positions() {
     loadPositions()
   }, [])
 
+  const addPositions = (newPosition) => {
+    setPositions([...positions, newPosition[0]])
+  }
+
   return (
     <>
       <Navbar />
@@ -40,7 +44,9 @@ function Positions() {
             }}
             onSubmit={async (values, actions) => {
               try {
-                await service.createPosition(values)
+                const response = await service.createPosition(values)
+                const newPosition = await service.getPositionById(response.data[0])
+                addPositions(newPosition.data)
                 actions.resetForm()
               } catch (error) {
                 console.log(error)

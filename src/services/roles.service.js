@@ -10,6 +10,11 @@ class EndpointsRoles {
     return response
   }
 
+  async getRolById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
+
   async createRol(rol) {
     const response = await axios.post(API_URL, rol)
     return response

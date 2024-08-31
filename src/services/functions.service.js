@@ -10,10 +10,10 @@ class EndpointsFunctions {
     return response
   }
   
-  // async getFunctionsOne(id) {
-  //   const response = await axios.get(API_URL)
-  //   return response
-  // }
+  async getFunctionById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
 
   async createFunction(func) {
     const response = await axios.post(API_URL, func)

@@ -10,6 +10,11 @@ class EndpointsManagers {
     return response
   }
 
+  async getManagerById(id) {
+    const response = await axios.get(`${API_URL}/${id}`)
+    return response
+  }
+
   async createManager(manager) {
     const response = await axios.post(API_URL, manager)
     return response
